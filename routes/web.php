@@ -1,5 +1,7 @@
 <?php
 require __DIR__.'/auth.php';
+
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Models\User;
@@ -30,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/avatar', [AvatarController::class, 'update'])->name('profile.avatar');
 });
 
 Route::post('/auth/redirect', function () {
@@ -53,5 +56,5 @@ Route::get('/auth/github/callback', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('ticket', TicketController::class);
+    Route::resource('ticket', TicketController::class);//crud với định dạng ticket.create,...
 });
